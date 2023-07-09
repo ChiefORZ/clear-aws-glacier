@@ -40,7 +40,7 @@ export AWS_VAULT_NAME=YOUR_VAULT_NAME
 
 And run the script via npx/pnpx:
 ```bash
-npx @chieforz/clear-aws-glacier ./archive-log.json
+npx @chieforz/clear-aws-glacier ./job-output.json
 
 pnpx @chieforz/clear-aws-glacier ./archive-log.json
 ```
