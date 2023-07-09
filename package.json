@@ -19,7 +19,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "release-it"
   },
   "dependencies": {
     "@t3-oss/env-core": "^0.6.0",
@@ -29,7 +30,9 @@
     "zx": "^7.2.3"
   },
   "devDependencies": {
-    "@types/node": "^20.4.1"
+    "@release-it/conventional-changelog": "^6.0.0",
+    "@types/node": "^20.4.1",
+    "release-it": "^15.4.1"
   },
   "engines": {
     "node": ">=18.0.0"
