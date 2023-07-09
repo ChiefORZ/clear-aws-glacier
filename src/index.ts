@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-import cliProgress from "cli-progress";
-import glob from "fast-glob";
-import fs, { promises as fsPromises } from "fs";
-import path from "path";
-import os from "os";
-import { $ } from "zx";
-import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-core';
+import cliProgress from 'cli-progress';
+import glob from 'fast-glob';
+import fs, { promises as fsPromises } from 'fs';
+import os from 'os';
+import path from 'path';
+import { z } from 'zod';
+import { $ } from 'zx';
 
+// require environment variables to be set
 export const env = createEnv({
   runtimeEnv: process.env,
   server: {
@@ -30,8 +31,8 @@ async function getFilesFromFolder(folder: string): Promise<string[]> {
 }
 
 async function parseIdsFromFile(jsonPath: string): Promise<string[]> {
-  const result = await fsPromises.readFile(jsonPath, "utf-8");
-  return result.split("\n");
+  const result = await fsPromises.readFile(jsonPath, 'utf-8');
+  return result.split('\n');
 }
 
 async function getAllIdsFromFolder(folder: string): Promise<string[]> {
@@ -42,16 +43,16 @@ async function getAllIdsFromFolder(folder: string): Promise<string[]> {
   return [...new Set(concatenated)];
 }
 
-(async function () {
+void (async function () {
   // parse the first input parameter as the path to the folder containing the json files
   const folderPath = process.argv[2];
   if (!folderPath) {
-    console.error("Please provide the path to the job-output.json");
+    console.error('Please provide the path to the job-output.json');
     process.exit(1);
   }
   // load the file
   const jobOutputPath = path.join(process.cwd(), folderPath);
-  const jobOutputRaw = await fsPromises.readFile(jobOutputPath, "utf-8");
+  const jobOutputRaw = await fsPromises.readFile(jobOutputPath, 'utf-8');
   const parsedJobOutput = JSON.parse(jobOutputRaw);
   const archiveIds = parsedJobOutput.ArchiveList.map(
     (archive: any) => archive.ArchiveId
@@ -59,10 +60,10 @@ async function getAllIdsFromFolder(folder: string): Promise<string[]> {
 
   // get olf log files, to pick up missing archives
   const errorIds = await getAllIdsFromFolder(
-    path.join(os.tmpdir(), "clear-aws-glacier", "error")
+    path.join(os.tmpdir(), 'clear-aws-glacier', 'error')
   );
   const successIds = await getAllIdsFromFolder(
-    path.join(os.tmpdir(), "clear-aws-glacier", "success")
+    path.join(os.tmpdir(), 'clear-aws-glacier', 'success')
   );
 
   const idQueue = [...new Set([...archiveIds, ...errorIds])].filter(
@@ -72,31 +73,33 @@ async function getAllIdsFromFolder(folder: string): Promise<string[]> {
   // create log files in tmp folder
   const successLogPath = path.join(
     os.tmpdir(),
-    "clear-aws-glacier",
-    "success",
+    'clear-aws-glacier',
+    'success',
     `${+new Date()}`
   );
   const successLogStream = fs.createWriteStream(successLogPath, {
-    flags: "a",
+    flags: 'a',
   });
   const errorLogPath = path.join(
     os.tmpdir(),
-    "clear-aws-glacier",
-    "error",
+    'clear-aws-glacier',
+    'error',
     `${+new Date()}`
   );
   const errorLogStream = fs.createWriteStream(errorLogPath, {
-    flags: "a",
+    flags: 'a',
   });
 
   let verbose = false;
   $.verbose = false;
   // pass the additional arguments to the aws cli
-  const additionalAwsCliArguments = process.argv.slice(3).filter(arg => arg !== "--verbose");
-  if (process.argv.includes("--verbose")) {
+  const additionalAwsCliArguments = process.argv
+    .slice(3)
+    .filter((arg) => arg !== '--verbose');
+  if (process.argv.includes('--verbose')) {
     verbose = true;
     $.verbose = true;
-  };
+  }
 
   // initiate progress bar
   const progressBar = new cliProgress.SingleBar(
@@ -126,7 +129,7 @@ async function getAllIdsFromFolder(folder: string): Promise<string[]> {
               .catch((err) => {
                 if (
                   err.stderr.includes(
-                    "Error when retrieving token from sso: Token has expired and refresh failed"
+                    'Error when retrieving token from sso: Token has expired and refresh failed'
                   )
                 ) {
                   return reject();
@@ -149,7 +152,7 @@ async function getAllIdsFromFolder(folder: string): Promise<string[]> {
     }
   }
 
-  processQueue().finally(async () => {
+  processQueue().finally(() => {
     if (!verbose) {
       progressBar.stop();
     }
