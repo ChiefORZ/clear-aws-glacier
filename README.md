@@ -42,7 +42,7 @@ And run the script via npx/pnpx:
 ```bash
 npx @chieforz/clear-aws-glacier ./job-output.json
 
-pnpx @chieforz/clear-aws-glacier ./archive-log.json
+pnpx @chieforz/clear-aws-glacier ./job-output.json
 ```
 
 All additional parameters will be passed to the aws cli sdk:
