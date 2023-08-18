@@ -32,10 +32,10 @@
     "extends": "@chieforz/eslint-config-tslint-base"
   },
   "dependencies": {
-    "@t3-oss/env-core": "^0.6.0",
+    "@t3-oss/env-core": "^0.6.1",
     "cli-progress": "^3.12.0",
     "fast-glob": "^3.3.1",
-    "zod": "^3.21.4",
+    "zod": "^3.22.1",
     "zx": "^7.2.3"
   },
   "devDependencies": {
