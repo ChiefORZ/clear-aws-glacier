@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@t3-oss/env-core':
     specifier: ^0.6.1
-    version: 0.6.1(typescript@5.1.6)(zod@3.22.1)
+    version: 0.6.1(typescript@5.1.6)(zod@3.22.2)
   cli-progress:
     specifier: ^3.12.0
     version: 3.12.0
@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1
   zod:
-    specifier: ^3.22.1
-    version: 3.22.1
+    specifier: ^3.22.2
+    version: 3.22.2
   zx:
     specifier: ^7.2.3
     version: 7.2.3
@@ -611,14 +611,14 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@t3-oss/env-core@0.6.1(typescript@5.1.6)(zod@3.22.1):
+  /@t3-oss/env-core@0.6.1(typescript@5.1.6)(zod@3.22.2):
     resolution: {integrity: sha512-KQD7qEDJtkWIWWmTVjNvk0wnHpkvAQ6CRbUxbWMFNG/fiosBQDQvtRpBNu6USxBscJCoC4z6y7P9MN52/mLOzw==}
     peerDependencies:
       typescript: '>=4.7.2'
       zod: ^3.0.0
     dependencies:
       typescript: 5.1.6
-      zod: 3.22.1
+      zod: 3.22.2
     dev: false
 
   /@tsconfig/node10@1.0.9:
@@ -5399,8 +5399,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zod@3.22.1:
-    resolution: {integrity: sha512-+qUhAMl414+Elh+fRNtpU+byrwjDFOS1N7NioLY+tSlcADTx4TkCUua/hxJvxwDXcV4397/nZ420jy4n4+3WUg==}
+  /zod@3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
     dev: false
 
   /zx@7.2.3:
